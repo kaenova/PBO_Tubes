@@ -37,15 +37,16 @@ public class SQLiteDB {
     private void migration() throws SQLException {
         Utils.Logger.Info("Starting Database Migration");
         ArrayList<String> temp = new ArrayList();
-        // Tabel A
-        temp.add("CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, username varchar(60) UNIQUE, password varchar(60));");
-        // Tabel B
-        temp.add("CREATE TABLE IF NOT EXISTS supplier (id INTEGER PRIMARY KEY AUTOINCREMENT, nama varchar(60), alamat varchar(200), telepon varchar(60));");
-        // Tabel C
-//        temp.add("CREATE TABLE IF NOT EXISTS ...");
-        // Tabel D
-//        temp.add("CREATE TABLE IF NOT EXISTS ...");
-
+        // Tabel user
+        temp.add("CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, username varchar(60) NOT NULL UNIQUE, password varchar(60) NOT NULL);");
+        // Tabel toko
+        temp.add("CREATE TABLE IF NOT EXISTS toko (id INTEGER PRIMARY KEY AUTOINCREMENT, nama varchar(60) NOT NULL, alamat varchar(200) NOT NULL , id_admin INTEGER NOT NULL, FOREIGN KEY (id_admin) REFERENCES user(id));");
+        // Tabel supplier
+        temp.add("CREATE TABLE IF NOT EXISTS supplier (id INTEGER PRIMARY KEY AUTOINCREMENT, nama varchar(60) NOT NULL, alamat varchar(200) NOT NULL, telepon varchar(60) NOT NULL, id_toko INTEGER NOT NULL, FOREIGN KEY (id_toko) REFERENCES toko(id));");
+        // Tabel produk
+        temp.add("CREATE TABLE IF NOT EXISTS produk (id INTEGER PRIMARY KEY AUTOINCREMENT, nama varchar(60) NOT NULL, satuan varchar(20) NOT NULL, stok float(10) NOT NULL, id_toko INTEGER NOT NULL, FOREIGN KEY (id_toko) REFERENCES toko(id));");
+        // Tabel relasi toko-pengurus(user)
+        temp.add("CREATE TABLE IF NOT EXISTS pengurus_toko_relation (id INTEGER PRIMARY KEY AUTOINCREMENT, id_toko INTEGER NOT NULL, id_pengurus INTEGER NOT NULL, FOREIGN KEY (id_toko) REFERENCES toko(id), FOREIGN KEY (id_pengurus) REFERENCES user(id));");
         for (String a : temp) {
             Statement tempState = con.createStatement();
             tempState.execute(a);
@@ -58,3 +59,16 @@ public class SQLiteDB {
         return con;
     }
 }
+
+
+/*
+Buat Koneksi database
+    Connection con = SQLiteDB.getDB();
+
+Memperisapkan SQL Statment
+    
+
+
+
+
+*/
