@@ -7,10 +7,9 @@ package Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,58 +17,44 @@ import java.sql.Statement;
  */
 public class SQLiteDB {
 
-    public static Connection con;
+    private static Connection con;
     private static boolean hasData = false;
 
-    public ResultSet displayUser() throws ClassNotFoundException, SQLException {
-        if (con == null) {
-            getConnection();
-        }
-        Statement state = con.createStatement();
-        ResultSet res = state.executeQuery("Select fname, lname FROM user");
-        return res;
-    }
-
-    private void getConnection() throws ClassNotFoundException, SQLException {
+    public SQLiteDB() throws SQLException, ClassNotFoundException {
+        // Always do this at the start of a application
+        Utils.Logger.Info("Connecting to Database");
         Class.forName("org.sqlite.JDBC");
         con = DriverManager.getConnection("jdbc:sqlite:SQLiteTest.db");
-        System.out.println("Connected to Database");
-        initialize();
-    }
-
-    private void initialize() throws SQLException {
-
-        // Preparing table
+        Utils.Logger.Info("Database Connected");
         if (!hasData) {
-            Statement state0 = con.createStatement();
-            state0.execute("CREATE TABLE IF NOT EXISTS user(id INTEGER PRIMARY KEY AUTOINCREMENT, fname varchar(60), lname varchar(60));");
-            System.out.println("Creating Dummy Data");
-            // Coba masukkin data
-            PreparedStatement prep = con.prepareStatement("INSERT INTO user(fname, lname) values(?,?);");
-            prep.setString(1, "Ini"); // Tanda tanya ke satu
-            prep.setString(2, "Satu Field"); // Tanda tanya ke dua
-            prep.execute();
-
-            PreparedStatement prep2 = con.prepareStatement("INSERT INTO user(fname, lname) values(?,?);");
-            prep2.setString(1, "Field"); // Tanda tanya ke satu
-            prep2.setString(2, "Ke Dua"); // Tanda tanya ke dua
-            prep2.execute();
+            Utils.Logger.Warning("Database not yet Initialized. Initializing Database");
+            migration();
+            hasData = true;
         }
-
+        Utils.Logger.Info("Use SQLiteDB.getDB() to get the connection.");
     }
 
-    public void addUser(String firstname, String lastName) throws ClassNotFoundException, SQLException {
-        if (con == null) {
-            getConnection();
-        }
+    private void migration() throws SQLException {
+        Utils.Logger.Info("Starting Database Migration");
+        ArrayList<String> temp = new ArrayList();
+        // Tabel A
+        temp.add("CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, username varchar(60) UNIQUE, password varchar(60));");
+        // Tabel B
+        temp.add("CREATE TABLE IF NOT EXISTS supplier (id INTEGER PRIMARY KEY AUTOINCREMENT, nama varchar(60), alamat varchar(200), telepon varchar(60));");
+        // Tabel C
+//        temp.add("CREATE TABLE IF NOT EXISTS ...");
+        // Tabel D
+//        temp.add("CREATE TABLE IF NOT EXISTS ...");
 
-        PreparedStatement prep = con.prepareStatement("INSERT INTO user values(?,?,?);");
-        prep.setString(2, firstname); // Tanda tanya ke dua
-        prep.setString(3, lastName); // Tanda tanya ke tiga
-        prep.execute();
+        for (String a : temp) {
+            Statement tempState = con.createStatement();
+            tempState.execute(a);
+        }
+        // Migration Complete
+        Utils.Logger.Info("Migration Complete");
     }
-    
-    public Connection getDB() {
+
+    public static Connection getDB() {
         return con;
     }
 }
