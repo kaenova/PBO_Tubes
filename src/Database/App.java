@@ -30,6 +30,9 @@ public class App {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        TestAnotherClass a = new TestAnotherClass();
+        a.TestDBIsConnected();
 
     }
 }

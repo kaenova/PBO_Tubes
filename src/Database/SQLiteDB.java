@@ -18,7 +18,7 @@ import java.sql.Statement;
  */
 public class SQLiteDB {
 
-    private static Connection con;
+    public static Connection con;
     private static boolean hasData = false;
 
     public ResultSet displayUser() throws ClassNotFoundException, SQLException {
@@ -67,5 +67,9 @@ public class SQLiteDB {
         prep.setString(2, firstname); // Tanda tanya ke dua
         prep.setString(3, lastName); // Tanda tanya ke tiga
         prep.execute();
+    }
+    
+    public Connection getDB() {
+        return con;
     }
 }
