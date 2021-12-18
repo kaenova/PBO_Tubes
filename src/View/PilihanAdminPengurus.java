@@ -5,7 +5,13 @@
  */
 package View;
 
+import Model.Admin;
+import Model.Toko;
 import Model.User;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,10 +22,10 @@ public class PilihanAdminPengurus extends javax.swing.JFrame {
     /**
      * Creates new form Tampilkan
      */
-    
-    public PilihanAdminPengurus(User test){
+    public PilihanAdminPengurus(User test) {
+        this.user = test;
         initComponents();
-        jLabel3.setText(test.getUsername());
+        jLabel3.setText(user.getUsername());
     }
 
     private PilihanAdminPengurus() {
@@ -73,11 +79,11 @@ public class PilihanAdminPengurus extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(jLabel3))
+                        .addGap(175, 175, 175)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(jLabel1)))
+                        .addGap(196, 196, 196)
+                        .addComponent(jLabel3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,9 +91,9 @@ public class PilihanAdminPengurus extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -99,10 +105,25 @@ public class PilihanAdminPengurus extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        // Get Toko Dulu Kalau misalkan tidak ada, lempar ke Buat Toko
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        Admin a = new Admin(user);
+        try {
+            // Get Toko Dulu Kalau misalkan tidak ada, lempar ke Buat Toko
+            // DashboardToko(Admin, Toko);
+            Toko toko = a.GetToko();
+            DashboardAdmin dash = new DashboardAdmin(toko, a);
+            dash.setVisible(true);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Toko tidak terdaftar. Harap mendaftar terlebih dahulu");
+            // Buat Toko
+            BuatToko buat = new BuatToko(a);
+            buat.setVisible(true);
+            this.dispose();
+            Logger.getLogger(PilihanAdminPengurus.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -141,6 +162,7 @@ public class PilihanAdminPengurus extends javax.swing.JFrame {
         });
     }
 
+    private User user;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

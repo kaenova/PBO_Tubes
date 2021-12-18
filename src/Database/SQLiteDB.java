@@ -40,7 +40,7 @@ public class SQLiteDB {
         // Tabel user
         temp.add("CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, username varchar(60) NOT NULL UNIQUE, password varchar(60) NOT NULL);");
         // Tabel toko
-        temp.add("CREATE TABLE IF NOT EXISTS toko (id INTEGER PRIMARY KEY AUTOINCREMENT, nama varchar(60) NOT NULL, alamat varchar(200) NOT NULL , id_admin INTEGER NOT NULL, FOREIGN KEY (id_admin) REFERENCES user(id));");
+        temp.add("CREATE TABLE IF NOT EXISTS toko (id INTEGER PRIMARY KEY AUTOINCREMENT, nama varchar(60) NOT NULL, alamat varchar(200) NOT NULL, kode varchar(20) NOT NULL, id_admin INTEGER NOT NULL, FOREIGN KEY (id_admin) REFERENCES user(id));");
         // Tabel supplier
         temp.add("CREATE TABLE IF NOT EXISTS supplier (id INTEGER PRIMARY KEY AUTOINCREMENT, nama varchar(60) NOT NULL, alamat varchar(200) NOT NULL, telepon varchar(60) NOT NULL, id_toko INTEGER NOT NULL, FOREIGN KEY (id_toko) REFERENCES toko(id));");
         // Tabel produk

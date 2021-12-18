@@ -19,9 +19,6 @@ public class Login extends javax.swing.JFrame {
     
     private User DataUserUtama;
 
-    /**
-     * Creates new form Login
-     */
     public Login() throws SQLException, ClassNotFoundException {
         Database.SQLiteDB DB = new Database.SQLiteDB();
         initComponents();

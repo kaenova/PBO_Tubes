@@ -31,6 +31,12 @@ public class User {
     public String getPassword() {
         return password;
     }
+    
+    public User(User a) {
+        this.id = a.getId();
+        this.username = a.getUsername();
+        this.password = a.getPassword();
+    }  
 
     public User(String username, String password) throws SQLException {
         Connection con = SQLiteDB.getDB();
