@@ -5,15 +5,23 @@
  */
 package Model;
 
+import Database.SQLiteDB;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author kaeno
  */
 public class Toko {
+
     private final int id, idAdmin;
     private String nama, alamat, kode;
-    
-    public Toko(int id, int idAdmin, String nama, String alamat, String kode){
+
+    public Toko(int id, int idAdmin, String nama, String alamat, String kode) {
         this.id = id;
         this.idAdmin = idAdmin;
         this.nama = nama;
@@ -40,5 +48,34 @@ public class Toko {
     public String getKode() {
         return kode;
     }
-        
+
+    public ArrayList<Produk> GetProduk() throws SQLException {
+        ArrayList<Produk> arr = new ArrayList();
+        Connection con = SQLiteDB.getDB();
+        PreparedStatement st = con.
+                prepareStatement("SELECT * FROM produk WHERE id_toko = ?");
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            arr.add(new Produk(rs.getInt("id"), rs.getInt("id_toko"),
+                    rs.getString("nama"), rs.getString("satuan"),
+                    rs.getFloat("satuan")));
+        }
+        return arr;
+    }
+
+    public ArrayList<Supplier> GetSupplier() throws SQLException {
+        ArrayList<Supplier> arr = new ArrayList();
+        Connection con = SQLiteDB.getDB();
+        PreparedStatement st = con.
+                prepareStatement("SELECT * FROM supplier WHERE id_toko = ?");
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            arr.add(new Supplier(rs.getInt("id"), rs.getInt("id_toko"),
+                    rs.getString("nama"), rs.getString("alamat"),
+                    rs.getString("telepon")));
+        }
+        return arr;
+    }
 }

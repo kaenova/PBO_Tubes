@@ -16,12 +16,13 @@ import java.sql.Statement;
  *
  * @author kaeno
  */
-public class Admin extends User {
+public class Admin extends User implements GetToko {
 
     public Admin(User a) {
         super(a);
     }
 
+    @Override
     public Toko GetToko() throws SQLException {
         // Get toko by Admin ID
         Connection con = Database.SQLiteDB.getDB();
@@ -34,9 +35,10 @@ public class Admin extends User {
             Utils.Logger.Warning("Tidak ditemukan User");
             throw new SQLException("Data tidak ditemukan");
         }
-        
+
         Toko toko = new Toko(rs.getInt("id"), super.getId(), rs.getString("nama"),
                 rs.getString("alamat"), rs.getString("kode"));
+        
         return toko;
     }
 

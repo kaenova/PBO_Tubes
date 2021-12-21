@@ -7,6 +7,11 @@ package View;
 
 import Model.Admin;
 import Model.Toko;
+import Model.Supplier;
+import Model.Produk;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -14,12 +19,16 @@ import Model.Toko;
  */
 public class DashboardAdmin extends javax.swing.JFrame {
 
-    
-    public DashboardAdmin(Toko a, Admin b) {
+    public DashboardAdmin(Toko a, Admin b) throws SQLException {
         this.toko = a;
         this.admin = b;
         initComponents();
-        Utils.Logger.Info("Detail Toko: id: "+a.getId()+" kode: "+a.getKode()+" nama: "+a.getNama()+" alamat: "+a.getAlamat()+" id_admin: "+a.getIdAdmin());
+        Utils.Logger.Info("Detail Toko: id: " + a.getId() + " kode: " + a.getKode() + " nama: " + a.getNama() + " alamat: " + a.getAlamat() + " id_admin: " + a.getIdAdmin());
+        jLabel3.setText(b.getUsername());
+        jLabel4.setText(a.getNama());
+        jLabel7.setText(a.getAlamat());
+        jLabel8.setText(a.getKode());
+        this.updateDataScreen();
     }
 
     /**
@@ -138,10 +147,20 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
 
         jButton4.setText("Tambah Supplier");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Daftar Supplier");
 
         jButton5.setText("Tambah Produk");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -187,11 +206,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
                                 .addComponent(jLabel10)
                                 .addGap(583, 583, 583)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel11)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel11))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton2)))
@@ -245,19 +261,55 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int idx = jTable1.getSelectedRow();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int idx = jTable1.getSelectedRow();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        int idx = jTable1.getSelectedRow();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+//        this.admin.TambahSupplier();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+//        this.admin.TambahProduk();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void updateDataScreen() throws SQLException {
+        /// Get Produk
+//        this.arrProduk = this.toko.GetProduk();
+//        DefaultTableModel tbProduk = new DefaultTableModel();
+//        tbProduk.addColumn("Nama Produk");
+//        tbProduk.addColumn("Jumlah Stok");
+//        for (int i = this.arrProduk.size() - 1; i > 0; i++) {
+//            Produk temp = this.arrProduk.get(i);
+//            tbProduk.insertRow(0, temp.getNama());
+//            tbProduk.insertRow(1, temp.getStok() + " " + temp.getSatuan());
+//        }
+//        jTable1.setModel(tbProduk);
+
+        /// Get Supplier
+        this.arrSupplier = this.toko.GetSupplier();
+        DefaultListModel<String> lsSupplier = new DefaultListModel();
+        for (int i = 0; i < this.arrSupplier.size(); i++) {
+            lsSupplier.addElement(arrSupplier.get(i).getNama());
+        }
+        jList1.setModel(lsSupplier);
+    }
+
     private Toko toko;
     private Admin admin;
+    private ArrayList<Produk> arrProduk = new ArrayList();
+    private ArrayList<Supplier> arrSupplier = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

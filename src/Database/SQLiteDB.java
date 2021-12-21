@@ -59,16 +59,3 @@ public class SQLiteDB {
         return con;
     }
 }
-
-
-/*
-Buat Koneksi database
-    Connection con = SQLiteDB.getDB();
-
-Memperisapkan SQL Statment
-    
-
-
-
-
-*/
