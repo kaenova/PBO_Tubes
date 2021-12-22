@@ -59,7 +59,7 @@ public class Toko {
         while (rs.next()) {
             arr.add(new Produk(rs.getInt("id"), rs.getInt("id_toko"),
                     rs.getString("nama"), rs.getString("satuan"),
-                    rs.getFloat("satuan")));
+                    rs.getFloat("stok")));
         }
         return arr;
     }
