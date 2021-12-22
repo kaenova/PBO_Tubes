@@ -6,6 +6,7 @@
 package View;
 
 import Model.Admin;
+import Model.Pengurus;
 import Model.Toko;
 import Model.User;
 import java.sql.SQLException;
@@ -104,8 +105,22 @@ public class PilihanAdminPengurus extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        // Get Toko Dulu Kalau misalkan tidak ada, lempar ke Buat Toko
+        Pengurus a = new Pengurus(user);
+        try {
+            // Get Toko Dulu Kalau misalkan tidak ada, lempar ke Buat Toko
+            // DashboardToko(Admin, Toko);
+            Toko toko = a.GetToko();
+            DashboardPengurus dashpeng = new DashboardPengurus();
+            dashpeng.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Belum mengurus toko");
+            // Join Toko
+            JoinToko join = new JoinToko(a);
+            join.setVisible(true);
+            this.dispose();
+            Logger.getLogger(PilihanAdminPengurus.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
