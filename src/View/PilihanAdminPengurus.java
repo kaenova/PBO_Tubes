@@ -116,6 +116,7 @@ public class PilihanAdminPengurus extends javax.swing.JFrame {
             Toko toko = a.GetToko();
             DashboardAdmin dash = new DashboardAdmin(toko, a);
             dash.setVisible(true);
+            this.dispose();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Toko tidak terdaftar. Harap mendaftar terlebih dahulu");
             // Buat Toko

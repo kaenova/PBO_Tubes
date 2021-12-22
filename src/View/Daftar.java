@@ -7,9 +7,6 @@ package View;
 
 import Model.User;
 import java.sql.SQLException;
-import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -119,7 +116,8 @@ public class Daftar extends javax.swing.JFrame {
             return;
         }
         try {
-            User.SignUp(jTextField1.getText(), jTextField2.getText());
+            String username = jTextField1.getText().trim();
+            User.SignUp(username, jTextField2.getText());
             JOptionPane.showMessageDialog(null, "Berhasil Terdaftar");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Tidak Berhasil Mendaftar");
