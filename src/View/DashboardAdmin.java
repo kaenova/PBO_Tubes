@@ -99,12 +99,22 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
         });
         jScrollPane2.setViewportView(jList1);
 
@@ -341,13 +351,23 @@ public class DashboardAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        this.tableIdxSelected = jTable1.getSelectedRow();
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        // TODO add your handling code here:
+        this.listIdxSelected = jList1.getSelectedIndex();
+    }//GEN-LAST:event_jList1MouseClicked
+
     private void updateDataScreen() throws SQLException {
         // ref https://www.youtube.com/watch?v=yQe5ufiIcYU
         /// Get Produk
         this.arrProduk = this.toko.GetProduk();
         DefaultTableModel tbProduk = (DefaultTableModel) jTable1.getModel();
         tbProduk.setRowCount(0); // hilangkan semua row
-        for (int i = this.arrProduk.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < this.arrProduk.size(); i++) {
             Produk temp = this.arrProduk.get(i);
             Vector v = new Vector();
             v.add(temp.getNama());
@@ -365,6 +385,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jList1.setModel(lsSupplier);
     }
 
+    private int tableIdxSelected = -1;
+    private int listIdxSelected = -1;
     private Toko toko;
     private Admin admin;
     private ArrayList<Produk> arrProduk = new ArrayList();
