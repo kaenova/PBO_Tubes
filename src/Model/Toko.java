@@ -18,9 +18,15 @@ import java.util.ArrayList;
  */
 public class Toko {
 
-    private final int id, idAdmin;
+    private int id, idAdmin;
     private String nama, alamat, kode;
-
+    
+    public Toko(int id, String nama, String alamat) {
+        this.id = id;
+        this.nama = nama;
+        this.alamat = alamat;
+    }
+    
     public Toko(int id, int idAdmin, String nama, String alamat, String kode) {
         this.id = id;
         this.idAdmin = idAdmin;
