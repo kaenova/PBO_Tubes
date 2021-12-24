@@ -15,6 +15,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -143,6 +144,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jLabel11.setText("Aksi Produk");
 
         jButton1.setText("Tambah");
+        jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -150,6 +152,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
 
         jButton2.setText("Kurang");
+        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -157,6 +160,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
 
         jButton3.setText("Ubah");
+        jButton3.setEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -180,6 +184,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
 
         jButton6.setText("Hapus");
+        jButton6.setEnabled(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -187,6 +192,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
 
         jButton7.setText("Hapus");
+        jButton7.setEnabled(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -293,10 +299,11 @@ public class DashboardAdmin extends javax.swing.JFrame {
                             .addComponent(jButton1)
                             .addComponent(jButton3)
                             .addComponent(jButton6)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,34 +319,73 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int idx = jTable1.getSelectedRow();
+        
+        try {
+            admin.TambahJumlahStok(toko, arrProduk.get(tableIdxSelected));
+            this.updateDataScreen();
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int idx = jTable1.getSelectedRow();
+        if (arrProduk.get(tableIdxSelected).getStok() - 1 < 0 ){
+            JOptionPane.showMessageDialog(null, "Nilai tidak bisa minus");
+            return;
+        }
+        try {
+            admin.KurangJumlahStok(toko, arrProduk.get(tableIdxSelected));
+            this.updateDataScreen();
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         int idx = jTable1.getSelectedRow();
+        Produk pr = arrProduk.get(idx);
+        TambahUbahProduk fr = new TambahUbahProduk(pr, admin, toko);
+        fr.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-//        this.admin.TambahSupplier();
+        InputSupplier fr = new InputSupplier(admin, toko);
+        fr.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-//        this.admin.TambahProduk();
+        TambahUbahProduk fr = new TambahUbahProduk(admin, toko);
+        fr.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            admin.HapusProduk(toko, arrProduk.get(tableIdxSelected));
+            this.updateDataScreen();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal dalam menghapus produk");
+            Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            admin.HapusSupplier(toko, arrSupplier.get(listIdxSelected));
+            this.updateDataScreen();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal dalam menghapus supplier");
+            Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -354,11 +400,16 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         this.tableIdxSelected = jTable1.getSelectedRow();
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(true);
+        jButton6.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
         this.listIdxSelected = jList1.getSelectedIndex();
+        jButton7.setEnabled(true);
     }//GEN-LAST:event_jList1MouseClicked
 
     private void updateDataScreen() throws SQLException {
@@ -383,6 +434,12 @@ public class DashboardAdmin extends javax.swing.JFrame {
             lsSupplier.addElement(arrSupplier.get(i).getNama());
         }
         jList1.setModel(lsSupplier);
+        
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton6.setEnabled(false);
+        jButton7.setEnabled(false);
     }
 
     private int tableIdxSelected = -1;

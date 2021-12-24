@@ -22,9 +22,6 @@ public class BuatToko extends javax.swing.JFrame {
     /**
      * Creates new form BuatToko
      */
-    public BuatToko() {
-        initComponents();
-    }
 
     public BuatToko(Admin a) {
         this.admin = a;
