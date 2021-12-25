@@ -114,6 +114,7 @@ public class Admin extends User implements GetToko {
             throw new SQLException("Gagal menghapus supplier");
         }
     }
+<<<<<<< HEAD
     
     public Supplier InputSupplier(Toko toko, String nama, String alamat, String telepon) throws SQLException{
         Connection con = Database.SQLiteDB.getDB();
@@ -132,4 +133,6 @@ public class Admin extends User implements GetToko {
         Supplier supplier = new Supplier(id, toko.getId(), nama, alamat, telepon);
         return supplier;
     }
+=======
+>>>>>>> 638282b5e58a4baef21834be92b0b298e735303b
 }

@@ -146,7 +146,17 @@
                           <Component id="btnDetail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+<<<<<<< HEAD
                   <Component id="jButton5" alignment="1" min="-2" pref="43" max="-2" attributes="0"/>
+=======
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jButton5" alignment="1" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButton4" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                          <Component id="jButton7" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+>>>>>>> 638282b5e58a4baef21834be92b0b298e735303b
                   <Component id="jLabel12" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
