@@ -324,28 +324,18 @@ public class DashboardAdmin extends javax.swing.JFrame {
                             .addComponent(jButton2)
                             .addComponent(jButton1)
                             .addComponent(jButton3)
-<<<<<<< HEAD
                             .addComponent(jButton6)
                             .addComponent(btnDetail)))
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDetailSupplier)))))
-=======
-                            .addComponent(jButton6)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel12))
->>>>>>> 638282b5e58a4baef21834be92b0b298e735303b
+                    .addComponent(jLabel12)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDetailSupplier)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -445,20 +435,14 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jButton2.setEnabled(true);
         jButton3.setEnabled(true);
         jButton6.setEnabled(true);
-<<<<<<< HEAD
         btnDetail.setEnabled(true);
-=======
->>>>>>> 638282b5e58a4baef21834be92b0b298e735303b
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
         this.listIdxSelected = jList1.getSelectedIndex();
         jButton7.setEnabled(true);
-<<<<<<< HEAD
         btnDetailSupplier.setEnabled(true);
-=======
->>>>>>> 638282b5e58a4baef21834be92b0b298e735303b
     }//GEN-LAST:event_jList1MouseClicked
 
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailActionPerformed
@@ -505,11 +489,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jButton3.setEnabled(false);
         jButton6.setEnabled(false);
         jButton7.setEnabled(false);
-<<<<<<< HEAD
         btnDetail.setEnabled(false);
         btnDetailSupplier.setEnabled(false);
-=======
->>>>>>> 638282b5e58a4baef21834be92b0b298e735303b
     }
 
     private int tableIdxSelected = -1;

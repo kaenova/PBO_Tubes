@@ -43,7 +43,7 @@ public class DetailSupplier extends javax.swing.JFrame {
         Ltelepon = new javax.swing.JLabel();
         Lalamat = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Detail Supplier");
 
