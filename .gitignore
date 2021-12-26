@@ -1,3 +1,4 @@
 /build/
 /JavaApplication9/nbproject/private/
 *.db
+/nbproject/private

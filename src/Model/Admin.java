@@ -114,4 +114,23 @@ public class Admin extends User implements GetToko {
             throw new SQLException("Gagal menghapus supplier");
         }
     }
+    
+    public Supplier InputSupplier(Toko toko, String nama, String alamat, String telepon) throws SQLException{
+        Connection con = Database.SQLiteDB.getDB();
+        
+        PreparedStatement st = con.prepareStatement("INSERT INTO supplier (id_toko, nama, alamat, telepon) "
+                + "VALUES (?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
+        st.setInt(1, toko.getId());
+        st.setString(2, nama);
+        st.setString(3, alamat);
+        st.setString(4, telepon);
+        st.execute();
+        ResultSet rs = st.getGeneratedKeys();
+        
+        int id = rs.getInt(1);
+
+        Supplier supplier = new Supplier(id, toko.getId(), nama, alamat, telepon);
+        return supplier;
+    }
+
 }
