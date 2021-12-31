@@ -7,6 +7,7 @@ package View;
 
 import Model.Pengurus;
 import Model.Toko;
+import com.sun.media.jfxmedia.logging.Logger;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -92,6 +93,7 @@ public class JoinToko extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // button join toko
+        Pengurus a = new Pengurus(this.pengurus);
         if ("".equals(jTextField1.getText())) {
             JOptionPane.showMessageDialog(null, "Kode tidak boleh Kosong");
             return;
@@ -99,10 +101,13 @@ public class JoinToko extends javax.swing.JFrame {
         try {
             // trim itu menghilangkan spasi
             String kode = jTextField1.getText().trim();
-            Toko data = this.pengurus.JoinToko(kode);
+            Toko data = a.JoinToko(kode);
             JOptionPane.showMessageDialog(null, "Berhasil Join Toko");
-            DashboardPengurus dashpeng = new DashboardPengurus();
+            Utils.Logger.Info(data.getAlamat()+"--------------------");
+            
+            DashboardPengurus dashpeng = new DashboardPengurus(data, a);
             dashpeng.setVisible(true);
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Tidak Berhasil Join Toko");
             Utils.Logger.Error("Gagal Dalam join toko");
