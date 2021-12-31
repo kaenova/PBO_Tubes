@@ -287,7 +287,7 @@ public class DashboardPengurus extends javax.swing.JFrame {
         int idx = jTable1.getSelectedRow();
         
         try {
-            admin.TambahJumlahStok(toko, arrProduk.get(tableIdxSelected));
+            pengurus.TambahJumlahStok(toko, arrProduk.get(tableIdxSelected));
             this.updateDataScreen();
         } catch (SQLException ex) {
             Logger.getLogger(DashboardPengurus.class.getName()).log(Level.SEVERE, null, ex);
@@ -302,7 +302,7 @@ public class DashboardPengurus extends javax.swing.JFrame {
             return;
         }
         try {
-            admin.KurangJumlahStok(toko, arrProduk.get(tableIdxSelected));
+            pengurus.KurangJumlahStok(toko, arrProduk.get(tableIdxSelected));
             this.updateDataScreen();
         } catch (SQLException ex) {
             Logger.getLogger(DashboardPengurus.class.getName()).log(Level.SEVERE, null, ex);
@@ -381,7 +381,6 @@ public class DashboardPengurus extends javax.swing.JFrame {
     private int tableIdxSelected = -1;
     private int listIdxSelected = -1;
     private Toko toko;
-    private Admin admin;
     private ArrayList<Produk> arrProduk = new ArrayList();
     private ArrayList<Supplier> arrSupplier = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
