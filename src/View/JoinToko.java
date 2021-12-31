@@ -104,7 +104,6 @@ public class JoinToko extends javax.swing.JFrame {
             Toko data = a.JoinToko(kode);
             JOptionPane.showMessageDialog(null, "Berhasil Join Toko");
             Utils.Logger.Info(data.getAlamat()+"--------------------");
-            Toko toko = a.GetToko();
             
             DashboardPengurus dashpeng = new DashboardPengurus(data, a);
             dashpeng.setVisible(true);
