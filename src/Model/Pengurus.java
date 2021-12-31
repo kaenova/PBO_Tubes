@@ -27,7 +27,7 @@ public class Pengurus extends User implements GetToko {
         if (rs.next() == false) {
             // Ngecek apakah ada data?
             Utils.Logger.Info("User Belum Join Toko");
-            //throw new SQLException("Data tidak ditemukan");
+            throw new SQLException("Data tidak ditemukan");
         }
         Utils.Logger.Info("User Sudah Join Toko");
         Toko toko = new Toko(rs.getInt("id"), rs.getString("nama"),rs.getString("alamat"));
@@ -45,7 +45,6 @@ public class Pengurus extends User implements GetToko {
             throw new SQLException("Id Tidak ditemukan");
         } else {
             id_toko = data.getInt("id");
-            Utils.Logger.Info(id_toko + "-----------------------------");
         }
         if (id_toko != -1 ){
             PreparedStatement st1 = con.prepareStatement("INSERT INTO pengurus_toko_relation ( id_toko, id_pengurus) "

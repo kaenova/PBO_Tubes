@@ -110,7 +110,7 @@ public class PilihanAdminPengurus extends javax.swing.JFrame {
             // Get Toko Dulu Kalau misalkan tidak ada, lempar ke Buat Toko
             // DashboardToko(Admin, Toko);
             Toko toko = a.GetToko();
-            DashboardPengurus dashpeng = new DashboardPengurus();
+            DashboardPengurus dashpeng = new DashboardPengurus(toko, a);
             dashpeng.setVisible(true);
             this.dispose();
         } catch (SQLException ex) {
