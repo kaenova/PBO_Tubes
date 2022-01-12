@@ -72,6 +72,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         btnDetail = new javax.swing.JButton();
         btnDetailSupplier = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -227,6 +228,13 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setText("Aksi Supplier");
 
+        jButton9.setText("Logout");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -246,10 +254,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
                                 .addComponent(jLabel4)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -276,7 +280,14 @@ public class DashboardAdmin extends javax.swing.JFrame {
                                                 .addGap(189, 189, 189)))))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton9)
+                                .addGap(37, 37, 37))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,8 +326,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel8))
-                .addGap(37, 37, 37)
+                    .addComponent(jLabel8)
+                    .addComponent(jButton9))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel10)
                     .addGroup(layout.createSequentialGroup()
@@ -352,7 +364,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int idx = jTable1.getSelectedRow();
-        
+
         try {
             admin.TambahJumlahStok(toko, arrProduk.get(tableIdxSelected));
             this.updateDataScreen();
@@ -364,7 +376,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int idx = jTable1.getSelectedRow();
-        if (arrProduk.get(tableIdxSelected).getStok() - 1 < 0 ){
+        if (arrProduk.get(tableIdxSelected).getStok() - 1 < 0) {
             JOptionPane.showMessageDialog(null, "Nilai tidak bisa minus");
             return;
         }
@@ -463,6 +475,21 @@ public class DashboardAdmin extends javax.swing.JFrame {
         fr.setVisible(true);
     }//GEN-LAST:event_btnDetailSupplierActionPerformed
 
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            Login frame = new Login();
+            frame.setVisible(true);
+            this.toko = null;
+            this.admin = null;
+            this.dispose();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(DashboardPengurus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton9ActionPerformed
+
     private void updateDataScreen() throws SQLException {
         // ref https://www.youtube.com/watch?v=yQe5ufiIcYU
         /// Get Produk
@@ -485,7 +512,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             lsSupplier.addElement(arrSupplier.get(i).getNama());
         }
         jList1.setModel(lsSupplier);
-        
+
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
         jButton3.setEnabled(false);
@@ -512,6 +539,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -71,6 +71,7 @@ public class DashboardPengurus extends javax.swing.JFrame {
         btnDetail = new javax.swing.JButton();
         btnDetailSupplier = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -184,6 +185,13 @@ public class DashboardPengurus extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setText("Aksi Supplier");
 
+        jButton9.setText("Logout");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -207,7 +215,11 @@ public class DashboardPengurus extends javax.swing.JFrame {
                         .addGap(79, 79, 79)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel9))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jButton9))
+                            .addComponent(jLabel9)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,8 +262,9 @@ public class DashboardPengurus extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4))
-                .addGap(37, 37, 37)
+                    .addComponent(jLabel4)
+                    .addComponent(jButton9))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel10)
                     .addGroup(layout.createSequentialGroup()
@@ -345,6 +358,20 @@ public class DashboardPengurus extends javax.swing.JFrame {
         fr.setVisible(true);
     }//GEN-LAST:event_btnDetailSupplierActionPerformed
 
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        try {
+            // TODO add your handling code here:
+            Login frame = new Login();
+            frame.setVisible(true);
+            this.toko = null;
+            this.pengurus = null;
+            this.dispose();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(DashboardPengurus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton9ActionPerformed
+
     private void updateDataScreen() throws SQLException {
         // ref https://www.youtube.com/watch?v=yQe5ufiIcYU
         /// Get Produk
@@ -385,6 +412,7 @@ public class DashboardPengurus extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
