@@ -7,7 +7,6 @@ package View;
 
 import Model.Pengurus;
 import Model.Toko;
-import com.sun.media.jfxmedia.logging.Logger;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
