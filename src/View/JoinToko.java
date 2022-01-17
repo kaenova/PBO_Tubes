@@ -20,6 +20,7 @@ public class JoinToko extends javax.swing.JFrame {
 
     /**
      * Creates new form JoinToko
+     *
      * @param p
      */
     public JoinToko(Pengurus p) {
@@ -103,16 +104,15 @@ public class JoinToko extends javax.swing.JFrame {
             String kode = jTextField1.getText().trim();
             Toko data = a.JoinToko(kode);
             JOptionPane.showMessageDialog(null, "Berhasil Join Toko");
-            Utils.Logger.Info(data.getAlamat()+"--------------------");
-            
+            Utils.Logger.Info(data.getAlamat() + "--------------------");
+
             DashboardPengurus dashpeng = new DashboardPengurus(data, a);
             dashpeng.setVisible(true);
-            
+            this.dispose();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Tidak Berhasil Join Toko");
             Utils.Logger.Error("Gagal Dalam join toko");
         }
-        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

@@ -16,11 +16,10 @@ import javax.swing.JOptionPane;
  * @author kaeno
  */
 public class Login extends javax.swing.JFrame {
-    
+
     private User DataUserUtama;
 
     public Login() throws SQLException, ClassNotFoundException {
-        Database.SQLiteDB DB = new Database.SQLiteDB();
         initComponents();
     }
 
@@ -124,8 +123,8 @@ public class Login extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String username = jTextField1.getText();
         String password = String.valueOf(jPasswordField1.getPassword());
-        
-        if ("".equals(username) || "".equals(password)){
+
+        if ("".equals(username) || "".equals(password)) {
             JOptionPane.showMessageDialog(null, "Nama dan Password tidak boleh Kosong");
             return;
         }
@@ -140,7 +139,9 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-        public static void main(String args[]) {
+    public static void main(String args[]) throws SQLException, ClassNotFoundException {
+        Database.SQLiteDB DB = new Database.SQLiteDB();
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

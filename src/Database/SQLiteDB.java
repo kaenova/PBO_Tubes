@@ -56,6 +56,10 @@ public class SQLiteDB {
     }
 
     public static Connection getDB() {
-        return con;
+        if (hasData) {
+            return con;
+        } else {
+            return null;
+        }
     }
 }
